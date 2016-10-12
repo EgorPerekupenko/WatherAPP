@@ -5,14 +5,14 @@
         .module('app')
         .controller('WeatherController', WeatherController);
 
-    WeatherController.$inject = ['weatherFactory'];
+    WeatherController.$inject = ['weatherFactory'];                 // injecting factory into a controller
 
     /* @ngInject */
-    function WeatherController(weatherFactory) {					// injecting factory into a controller
+    function WeatherController(weatherFactory) {					
         var vm = this;
         vm.title='WeatherController'; 
       
-           // dynamicly populating buttons 
+           
         
          vm.getWeather=getWeather;
          vm.searchHistory=[];
@@ -22,21 +22,21 @@
            
         	weatherFactory.getWeather(cityName).then(
 
-        				function(data){ 				// Resolve function
+        				function(data){ 				  // Resolve function
         					vm.weatherInformation=data;
 
-                            vm.searchHistory.push({
+                            vm.searchHistory.push({                         // pushing data to "search history table "
                                 name : data.data.name,
                                 timestamp: new Date
                             })
-                             if (vm.searchHistory.length > 5) {
+                             if (vm.searchHistory.length > 5) {             // clearing search field  once search list over 5 items
                                   vm.searchHistory=[];
                              }
 
 
         				},
                             function(err){
-                                     console.log('Error'); // Reject Func
+                                     toastr.error('Error');                 // Reject Func
                             }
                         )
         					

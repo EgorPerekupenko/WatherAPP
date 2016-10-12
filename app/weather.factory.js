@@ -20,7 +20,7 @@
 
         function getWeather(city) {
 
-           return $http({
+           return $http({                                                           // $http service 
                     method: 'GET',
                     url: 'http://api.openweathermap.org/data/2.5/weather?',
                     params: {

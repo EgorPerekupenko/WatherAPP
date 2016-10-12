@@ -1,6 +1,6 @@
 (function() {
-    'use strict';
+    'use strict';												// top module 
 
     angular
-        .module('app', []);      						// including a toastr module
+        .module('app', ['toastr']);      						// including a toastr module
 })();	
