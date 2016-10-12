@@ -5,10 +5,10 @@
         .module('app')
         .controller('WeatherController', WeatherController);
 
-    WeatherController.$inject = ['weatherFactory'];                 // injecting factory into a controller
+    WeatherController.$inject = ['weatherFactory','toastr'];
 
-    /* @ngInject */
-    function WeatherController(weatherFactory) {					
+    // injecting factory into a controller
+    function WeatherController(weatherFactory,toastr) {					
         var vm = this;
         vm.title='WeatherController'; 
       
@@ -17,26 +17,27 @@
          vm.getWeather=getWeather;
          vm.searchHistory=[];
          vm.searchTerm='';
-        
-        function getWeather(cityName){                                              // getWeather function
+        // getWeather function
+        function getWeather(cityName){                                              
            
         	weatherFactory.getWeather(cityName).then(
-
-        				function(data){ 				  // Resolve function
+// Resolve function
+        				function(data){ 				
         					vm.weatherInformation=data;
 
-                            vm.searchHistory.push({                         // pushing data to "search history table "
+                            vm.searchHistory.push({
                                 name : data.data.name,
                                 timestamp: new Date
                             })
-                             if (vm.searchHistory.length > 5) {             // clearing search field  once search list over 5 items
+                             if (vm.searchHistory.length > 5) {
                                   vm.searchHistory=[];
                              }
-
+                             toastr.sucsess('Its working');
 
         				},
-                            function(err){
-                                     toastr.error('Error');                 // Reject Func
+                        // Reject Func
+                            function(error){
+                            toastr.error('Error'); 
                             }
                         )
         					
@@ -45,3 +46,4 @@
         }
     }
 })();	
+//SA,CW,BS,EP,VZ

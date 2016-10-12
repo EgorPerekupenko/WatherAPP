@@ -1,108 +1,110 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
-<meta charset="UTF-8">
-<title>Origin Weather App</title>
-<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<meta charset="UTF-8">
+	<title>Origin Weather App</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="styles/index.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css">
 </head>
 <body ng-controller="WeatherController as vm">
-<div class="container">
-	<div class="well" id="header" >
-		<h2 >OriginWeatherAPP</h2>
-		<h5>Always know if you'll need an umbrella!</h5>
-	</div> 
+	<div class="container">
+		<div class="well" id="header" >
+			<h2 >OriginWeatherAPP</h2>
+			<h5>Always know if you'll need an umbrella!</h5>
+		</div> 
 
-			<div class="btn-group " id="buttons">
-				  <button type="button"  class="btn btn-primary" ng-click="vm.getWeather('San Diego')">San Diego</button>
-				  <button type="button"  class="btn btn-primary" ng-click="vm.getWeather('London')">London</button>
-                  <button type="button"  class="btn btn-primary" ng-click="vm.getWeather('New York')">New York</button>
-				  <button type="button"  class="btn btn-primary" ng-click="vm.getWeather('Tokyo')">Tokyo</button>
-				  <button type="button"  class="btn btn-primary" ng-click="vm.getWeather('Washington D.C.')">Wasington D.C.</button>
-				  
-				  
-			</div>
-					
-					  <form ng-submit="vm.getWeather(vm.searchTerm)">
-							     <div class="input-group">
-							      	<input type="text" class="form-control" placeholder="Search for city" ng-model="vm.searchTerm" >
-							      <span class="input-group-btn">
-							        <button class="btn btn-secondary" type="submit">Go!</button>
-							      </span>
-								</div>			
-					  </form>
-					
+		<div class="btn-group " id="buttons">
+			<button type="button"  class="btn btn-primary" ng-click="vm.getWeather('San Diego')">San Diego</button>
+			<button type="button"  class="btn btn-primary" ng-click="vm.getWeather('London')">London</button>
+			<button type="button"  class="btn btn-primary" ng-click="vm.getWeather('New York')">New York</button>
+			<button type="button"  class="btn btn-primary" ng-click="vm.getWeather('Tokyo')">Tokyo</button>
+			<button type="button"  class="btn btn-primary" ng-click="vm.getWeather('Washington D.C.')">Wasington D.C.</button>
 
-						<br>
+
+		</div>
+
+		<form ng-submit="vm.getWeather(vm.searchTerm)">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search for city" ng-model="vm.searchTerm" >
+				<span class="input-group-btn">
+					<button class="btn btn-secondary" type="submit">Go!</button>
+				</span>
+			</div>			
+		</form>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-info">	
+					<div class="panel-heading">
+						City Information
+					</div>
+					<div class="panel-body">
 						<div class="row">
-							<div class="col-md-6">
-								<div class="panel panel-info">	
-									<div class="panel-heading">
-										City Information
-									</div>
-										<div class="panel-body">
-											<div class="row">
-												<div class="row">
-												      <h3 class="text-center icon">{{vm.weatherInformation.data.name}}</h3>
-										              <p class="text-center">Lat/Long: {{vm.weatherInformation.data.coord.lat}}, {{vm.weatherInformation.data.coord.lon}}</p>
-											    </div>
-														        <div class="col-md-4">
-													                <p><strong>Temperature</strong></p>
-													                <p id="information">{{vm.weatherInformation.data.main.temp }}F</p>
-													            </div>
-													            <div class="col-md-4">
-													                <p><strong>Pressure</strong></p>
-													                <p id="information">{{vm.weatherInformation.data.main.pressure }}kPa</p>
-													            </div>
-													            <div class="col-md-4">
-													                <p><strong>Humidity</strong></p>
-													                <p id="information">{{vm.weatherInformation.data.main.humidity }}%</p>
-													            </div>
-													   </div>
-													        <br />
-													        <div class="row">
-													            <div class="col-md-4">
-													                <p><strong>Lowest Tem</strong></p>
-													                <p id="information">{{vm.weatherInformation.data.main.temp_min}}F</p>
-													            </div>
-													            <div class="col-md-4">
-													                <p><strong>Highest Temp</strong></p>
-													                <p id="information">{{vm.weatherInformation.data.main.temp_max}}F</p>
-													            </div>
-													            <div class="col-md-4">
-													                <p><strong>Wind Speed</strong></p>
-													                <p id="information">{{vm.weatherInformation.data.wind.speed }}mph</p>
-													            </div>
-													        </div>
-									    </div>
-										</div>
-									
-							</div>			
-								<div class="col-md-6">
-								  		<div class="panel panel-info">
-											<div class="panel-heading">    
-												Search History
-											</div>
-												<div class="panel-body"></div>
-												<ul class="list-group">
-													<li class="list-group-item" ng-repeat="searchItem in vm.searchHistory"><strong>{{searchItem.name}}{{searchItem.timestamp}}</strong></li>
-												</ul>
-									
-										</div>
-									
-								</div>
-				            </div>
-						<!-- <pre>{{vm.weatherInformation | json}}</pre> -->
-</div>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script> 
-<!--Folder by Feature according to John Papa style-->
-<script src="/app/app.module.js"></script>
-<script  src="/app/weather.factory.js"></script>
-<script  src="/app/weather.controller.js"></script>	
+							<div class="row">
+								<h3 class="text-center icon">{{vm.weatherInformation.data.name}}</h3>
+								<p class="text-center">Lat/Long: {{vm.weatherInformation.data.coord.lat}}, {{vm.weatherInformation.data.coord.lon}}</p>
+							</div>
+							<div class="col-md-4">
+								<p><strong>Temperature</strong></p>
+								<p id="information">{{vm.weatherInformation.data.main.temp }}F</p>
+							</div>
+							<div class="col-md-4">
+								<p><strong>Pressure</strong></p>
+								<p id="information">{{vm.weatherInformation.data.main.pressure }}kPa</p>
+							</div>
+							<div class="col-md-4">
+								<p><strong>Humidity</strong></p>
+								<p id="information">{{vm.weatherInformation.data.main.humidity }}%</p>
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p><strong>Lowest Tem</strong></p>
+								<p id="information">{{vm.weatherInformation.data.main.temp_min}}F</p>
+							</div>
+							<div class="col-md-4">
+								<p><strong>Highest Temp</strong></p>
+								<p id="information">{{vm.weatherInformation.data.main.temp_max}}F</p>
+							</div>
+							<div class="col-md-4">
+								<p><strong>Wind Speed</strong></p>
+								<p id="information">{{vm.weatherInformation.data.wind.speed }}mph</p>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<div class="panel-heading">    
+						Search History
+					</div>
+					<div class="panel-body"></div>
+					<ul class="list-group">
+						<li class="list-group-item" ng-repeat="searchItem in vm.searchHistory"><strong>{{searchItem.name}}{{searchItem.timestamp}}</strong></li>
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+		<!-- <pre>{{vm.weatherInformation | json}}</pre> -->
+	</div>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script> 
+	<!--Folder by Feature according to John Papa style-->
+	<script src="/app/app.module.js"></script>
+	<script  src="/app/weather.factory.js"></script>
+	<script  src="/app/weather.controller.js"></script>	
 
 
 </body>
 </html>
+<!-- SA,CW,BS,EP,VZ -->
