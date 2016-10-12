@@ -1,0 +1,19 @@
+h2{
+	font-size: 5em
+}
+#header{
+	border-radius: 50px;
+
+}
+#forecast{
+	margin-top: 20px;
+	background-color:	LightSkyBlue ;
+	font-size: 1.25em
+}
+#buttons{
+	margin-bottom: 10px
+}
+#information{
+
+	color: green;
+}
